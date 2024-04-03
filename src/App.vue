@@ -6,7 +6,10 @@
     <button @click="componentSelecionado = 'PostsLista'">Lista</button>
     <button @click="componentSelecionado = 'SobreComponent'">Sobre</button>
 
-    <component :is="componentSelecionado"></component>
+    <component 
+      :is="componentSelecionado"
+      v-bind="propsAtuais">
+    </component>
   </div>
 </template>
 
@@ -29,6 +32,13 @@ export default {
             { id: 1, titulo: 'Components no VueJS', conteudo: 'Components são uma das peças mais importantes no VueJS', autor: 'Hesnan Ávila'},
             { id: 2, titulo: 'Components no VueJS 2', conteudo: 'Components são uma das peças mais importantes no VueJS 2', autor: 'Hesnan Ávila 2'}
         ]
+    }
+  },
+  computed: {
+    propsAtuais () {
+      return this.componentSelecionado === 'PostsLista'
+        ? { posts: this.posts }
+        : {}
     }
   }
 }
